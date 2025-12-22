@@ -19,7 +19,6 @@ const sampleProject: Project = {
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex w-full max-w-4xl flex-col bg-white dark:bg-black">
         <Navigation />
         {/* hero: (until the github chart) */}
@@ -83,6 +82,5 @@ export default function Home() {
           </div>
         </section>
       </main>
-    </div>
   );
 }

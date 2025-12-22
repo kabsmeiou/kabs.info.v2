@@ -7,7 +7,7 @@ export default function Navigation() {
                 Kabs.info
             </div>
             <div className="flex space-x-12">
-                <a href="#projects" className="text-zinc-700 dark:text-zinc-300 hover:text-[var(--color-primary)] transition-colors">
+                <a href="/projects" className="text-zinc-700 dark:text-zinc-300 hover:text-[var(--color-primary)] transition-colors">
                     Projects
                 </a>
                 <a href="#contact" className="text-zinc-700 dark:text-zinc-300 hover:text-[var(--color-primary)] transition-colors">
