@@ -22,25 +22,16 @@ export default function Home() {
       <main className="flex w-full max-w-4xl flex-col bg-white dark:bg-black">
         <Navigation />
         {/* hero: (until the github chart) */}
-        <section className="flex min-h-screen flex-col items-center sm:items-start px-4 py-32 sm:px-16">
+        <section className="flex min-h-screen flex-col items-center sm:items-start space-y-16 px-4 py-32 sm:px-16">
           <Header />
-          {/* Resume Link */}
-          <a
-            href="/Christian_Cabral_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 rounded-lg px-4 py-2 dark:text-white text-black border border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"
-          >
-            resume.pdf
-          </a>
           {/* GitHub Chart - mt-auto pushes this to the bottom of the section */}
-          <div className="w-full mt-4 sm:mt-auto sm:pt-12">
+          <div className="w-full sm:mt-auto sm:pt-12">
             <GithubChart />
           </div>
         </section>
 
         {/* SECTION 2: Below the fold */}
-        <section className="flex flex-col gap-y-8 py-32 px-16 border-t border-zinc-100 dark:border-zinc-900">
+        <section className="flex flex-col gap-y-8 py-32 px-4 sm:px-16">
           <div className="flex flex-row justify-between">
             <h2 className="text-3xl font-semibold text-black dark:text-zinc-50">
               Current Projects
@@ -56,7 +47,7 @@ export default function Home() {
         </section>
 
         {/* Experiences section */}
-        <section className="flex flex-col gap-8 py-32 px-16 border-t border-zinc-100 dark:border-zinc-900">
+        <section className="flex flex-col gap-8 py-32 px-4 sm:px-16">
           <h2 className="text-3xl font-semibold mb-4 text-black dark:text-zinc-50">
             Experience
           </h2>
@@ -73,7 +64,7 @@ export default function Home() {
         </section>
 
         {/* about me */}
-        <section className="flex flex-col gap-8 py-32 px-16 border-t border-zinc-100 dark:border-zinc-900">
+        <section className="flex flex-col gap-8 py-32 px-4 sm:px-16">
           <h2 className="text-3xl font-semibold mb-4 text-black dark:text-zinc-50">
               Why I do what I do
           </h2>
