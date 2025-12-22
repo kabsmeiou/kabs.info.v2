@@ -1,1 +1,0 @@
-// render here the mdx content of the project

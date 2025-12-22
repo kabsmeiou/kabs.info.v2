@@ -20,7 +20,7 @@ const ProjectCard = ({
 }: ProjectCardProps) => {
     return (
         // card container
-        <div className="flex md:flex-row flex-col rounded-lg overflow-hidden transition-shadow duration-300 relative">
+        <div className="flex md:flex-row flex-col rounded-lg overflow-hidden transition-shadow duration-300 relative hover:shadow-lg hover:border border-zinc-200 dark:border-zinc-800 cursor-pointer">
             <div className="absolute bottom-0 md:top-0 right-0 w-32 h-32 
                 bg-gradient-to-tl md:bg-gradient-to-bl from-primary/20 to-transparent 
                 rounded-tl-full md:rounded-bl-full opacity-50">
