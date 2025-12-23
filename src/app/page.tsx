@@ -31,7 +31,7 @@ export default function Home() {
         </section>
 
         {/* SECTION 2: Below the fold */}
-        <section className="flex flex-col gap-y-8 py-32 px-4 sm:px-16">
+        <section className="flex flex-col gap-y-8 py-16 px-4 sm:px-16">
           <div className="flex flex-row justify-between">
             <h2 className="text-3xl font-semibold text-black dark:text-zinc-50">
               Current Projects
@@ -47,7 +47,7 @@ export default function Home() {
         </section>
 
         {/* Experiences section */}
-        <section className="flex flex-col gap-8 py-32 px-4 sm:px-16">
+        <section className="flex flex-col gap-8 py-16 px-4 sm:px-16">
           <h2 className="text-3xl font-semibold mb-4 text-black dark:text-zinc-50">
             Experience
           </h2>
@@ -64,7 +64,7 @@ export default function Home() {
         </section>
 
         {/* about me */}
-        <section className="flex flex-col gap-8 py-32 px-4 sm:px-16">
+        <section className="flex flex-col gap-8 py-16 px-4 sm:px-16">
           <h2 className="text-3xl font-semibold mb-4 text-black dark:text-zinc-50">
               Why I do what I do
           </h2>
