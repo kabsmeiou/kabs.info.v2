@@ -10,7 +10,8 @@ import { Project } from "@/components/ProjectCard";
 
 // sample project
 const sampleProject: Project = {
-    title: "Sample Project",
+      id: "sample-project",
+    name: "Sample Project",
     description: "This is a sample project description. This project showcases the use of React and TypeScript in building a modern web application.",
     tags: ["React", "TypeScript", "TailwindCSS"],
     githubLink: "https://github.com/sample/sample-project",

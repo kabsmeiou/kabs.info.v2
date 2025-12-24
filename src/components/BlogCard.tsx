@@ -1,5 +1,6 @@
 
 export interface Blog {
+    id: string;
     title: string;
     content: string;
     coverImage?: string;
@@ -13,6 +14,7 @@ export interface Blog {
 export default function BlogCard(props: Blog) {
     return (
         <div className="relative flex flex-col gap-y-4 rounded-xl rounded-bl-[3rem] rounded-br-[3rem] px-2 pb-4 pt-2 overflow-hidden hover:shadow-lg hover:dark:shadow-lg transition-all duration-300 cursor-pointer group">
+            <a href={`/blogs/${props.id}`} className="absolute inset-0 z-20"></a>
             {/* Animated gradient background */}
             <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-transparent transition-opacity duration-600 opacity-50 group-hover:opacity-0 pointer-events-none rounded-xl rounded-bl-[3rem] rounded-br-[3rem]"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent transition-opacity duration-600 opacity-0 group-hover:opacity-50 pointer-events-none rounded-xl rounded-bl-[3rem] rounded-br-[3rem]"></div>
