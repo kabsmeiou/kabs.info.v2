@@ -3,7 +3,8 @@
 import ImageSlider from './ImageSlider';
 
 export interface Project {
-    title: string;
+    id: string;
+    name: string;
     description: string;
     tags: string[];
     githubLink?: string;
@@ -21,6 +22,7 @@ const ProjectCard = ({
     return (
         // card container
         <div className="flex md:flex-row flex-col rounded-lg overflow-hidden transition-shadow duration-300 relative hover:shadow-lg hover:border border-zinc-200 dark:border-zinc-800 cursor-pointer">
+            <a href={`/projects/${project.id}`} className="absolute inset-0 z-20"></a>
             <div className="absolute bottom-0 md:top-0 right-0 w-32 h-32 
                 bg-gradient-to-tl md:bg-gradient-to-bl from-primary/20 to-transparent 
                 rounded-tl-full md:rounded-bl-full opacity-50">
@@ -34,7 +36,7 @@ const ProjectCard = ({
                 <div className="p-6">
                     {/* Project Title */}
                     <h3 className="text-xl font-semibold mb-2 text-black dark:text-zinc-50">
-                        {project.title}
+                        {project.name}
                     </h3>
 
                     {/* Project Description */}
