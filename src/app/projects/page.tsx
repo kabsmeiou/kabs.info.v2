@@ -13,7 +13,6 @@ export default function Projects() {
         )
         .then((res) => res.json())
         .then((data) => {
-            console.log("Fetched projects data:", data);
             try {
                 setProjects(data as Project[]);
             } catch (error) {
@@ -23,7 +22,7 @@ export default function Projects() {
     }, []);
     
     return (
-        <section className="flex flex-col gap-y-8 py-16 px-4 sm:px-16">
+        <section className="flex flex-col gap-y-8 py-16 px-4">
             {/* filter button */}
             <div className="flex flex-row justify-between">
                 <h2 className="text-4xl font-semibold text-black dark:text-zinc-50">

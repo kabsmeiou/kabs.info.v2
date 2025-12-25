@@ -1,6 +1,10 @@
-import BlogCard from "@/components/BlogCard";
+"use client";
+import { useEffect, useState} from "react";
+
+import BlogCard, { Blog } from "@/components/BlogCard";
 
 import { type Blog } from "@/components/BlogCard";
+
 
 const sampleBlogCard: Blog[] = [
     {
@@ -25,14 +29,30 @@ const sampleBlogCard: Blog[] = [
 
 
 export default function Blog() {
+    const [blogs, setBlogs] = useState<Blog[]>([]);
+
+    useEffect(() => {
+        fetch(
+            "https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/blogs.json"
+        )
+        .then((res) => res.json())
+        .then((data) => {
+            try {
+                setBlogs(data as Blog[]);
+            } catch (error) {
+                console.error("Failed to load blogs:", error);
+            }
+        })
+    }, []);
     return (
-        <>
+        <section className="flex flex-col gap-y-8 py-16 px-4">
             <h1 className="text-4xl font-bold text-black dark:text-zinc-50">i might write here, sometimes.</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {sampleBlogCard.map((blog, index) => (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {blogs.map((blog, index) => (
                     <BlogCard key={index} {...blog} />
                 ))}
             </div>
-        </>
+        </section>
+
     );
 }
