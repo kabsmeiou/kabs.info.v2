@@ -3,22 +3,20 @@ import ProjectCard from '@/components/ProjectCard';
 
 import { Project } from "@/components/ProjectCard";
 import { useEffect, useState } from 'react';
+import fetchList from '@/api/contentApi';
 
 export default function Projects() {
     const [projects, setProjects] = useState<Project[]>([]);
-
     useEffect(() => {
-        fetch(
-            "https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/projects.json"
-        )
-        .then((res) => res.json())
-        .then((data) => {
+        const fetchProjects = async () => {
             try {
-                setProjects(data as Project[]);
+                const projectsData = await fetchList<Project>('https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/projects.json');
+                setProjects(projectsData);
             } catch (error) {
-                console.error("Failed to load projects:", error);
+                console.error("Error fetching projects:", error);
             }
-        })
+        };
+        fetchProjects();
     }, []);
     
     return (
