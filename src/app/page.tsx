@@ -1,24 +1,45 @@
+"use client";
+import { useEffect, useState } from "react";
 import GithubChart from "@/components/Github";
 import Navigation from "@/components/Navigation";
 import Header from "@/components/Header";
 import ProjectCard from "@/components/ProjectCard";
 import ExperienceCard from "@/components/ExperienceCard";
-
-
+import { Experience } from "@/components/ExperienceCard";
 import { Project } from "@/components/ProjectCard";
 
-
-// sample project
-const sampleProject: Project = {
-      id: "sample-project",
-    name: "Sample Project",
-    description: "This is a sample project description. This project showcases the use of React and TypeScript in building a modern web application.",
-    tags: ["React", "TypeScript", "TailwindCSS"],
-    githubLink: "https://github.com/sample/sample-project",
-    sampleImages: ["/image1.jpg", "/image1.jpg"]
-};
+import fetchList from "@/api/contentApi";
 
 export default function Home() {
+  const [experiences, setExperiences] = useState<Experience[]>([]);
+  
+  // fetch experiences from experiences.json
+  useEffect(() => {
+    const fetchExperiences = async () => {
+      try {
+        const experiencesData = await fetchList<Experience>('https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/experiences.json');
+        setExperiences(experiencesData);
+      } catch (error) {
+        console.error("Error fetching experiences:", error);
+      }
+    };
+    fetchExperiences();
+  }, []);
+
+  // fetch 2 recent projects from projects.json
+  const [recentProjects, setRecentProjects] = useState<Project[]>([]);
+  useEffect(() => {
+    const fetchRecentProjects = async () => {
+      try {
+        const projectsData = await fetchList<Project>('https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/projects.json');
+        setRecentProjects(projectsData.slice(0, 2)); // get first 2 projects
+      } catch (error) {
+        console.error("Error fetching recent projects:", error);
+      }
+    };
+    fetchRecentProjects();
+  }, []);
+
   return (
       <main className="flex w-full max-w-4xl flex-col bg-white dark:bg-black">
         <Navigation />
@@ -44,7 +65,9 @@ export default function Home() {
           <p className="text-zinc-600 dark:text-zinc-400 mb-8">
             I like working on interesting and cool projects, but I also tackle not so glamorous tasks as I believe they are essential for my growth as a software engineer! I write code as a way to express my desire to make my ideas come to life and appreciate the time I have in this world. If you find my work helpful in any way, do give it a like or two!
           </p>
-          <ProjectCard project={sampleProject} />
+          {recentProjects.map(project => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
         </section>
 
         {/* Experiences section */}
@@ -52,16 +75,9 @@ export default function Home() {
           <h2 className="text-3xl font-semibold mb-4 text-black dark:text-zinc-50">
             Experience
           </h2>
-          <ExperienceCard 
-            experience={{
-              role: "Software Engineer",
-              company: "Tech Corp",
-              duration: "Jan 2020 - Present",
-              description: "Working on various web development projects using modern technologies.",
-              companyLogo: "https://via.placeholder.com/100",
-              companyLink: "https://techcorp.com"
-            }} 
-          />
+          {experiences.map(experience => (
+            <ExperienceCard key={experience.company} experience={experience} />
+          ))}
         </section>
 
         {/* about me */}
