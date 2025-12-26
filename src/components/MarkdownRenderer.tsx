@@ -77,7 +77,7 @@ function CodeBlock({
       <button
         type="button"
         onClick={handleCopy}
-        className="absolute right-2 top-2 bg-[color-mix(in_oklch,var(--color-primary)_20%,transparent)] px-2 py-1 rounded text-sm hover:opacity-80 transition-opacity"
+        className="absolute right-2 top-2 bg-primary px-2 py-1 rounded text-sm hover:opacity-80 transition-opacity"
       >
         {copied ? "Copied!" : "Copy"}
       </button>

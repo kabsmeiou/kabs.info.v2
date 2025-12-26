@@ -2,44 +2,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import useContent from "@/hooks/useContent";
 
 import { Project } from "@/components/ProjectCard";
 
 export default function ProjectView() {
     const id = useParams<{ id: string }>().slug;
-    const [content, setContent] = useState<string>("");
-    const [metadata, setMetadata] = useState<Project | null>(null);
-
-    useEffect(() => {
-        const fetchProject = async() =>  {
-            try {
-                const response = await fetch(
-                    `https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/projects/${id}.md`
-                );
-                if (!response.ok) throw new Error("Failed to fetch project data");
-                const contentData = await response.text();
-                setContent(contentData);
-            } catch (error) {
-                console.error("Failed to fetch project data:", error);
-                return;
-            }
-            // fetch project metadata
-            try {
-                const response = await fetch(
-                    `https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/projects.json`
-                );
-                if (!response.ok) throw new Error("Failed to fetch project metadata");
-                const metadata: Project[] = await response.json();
-                const projectMetadata = metadata.find((project) => project.id === id) || null;
-                setMetadata(projectMetadata);
-            } catch (error) {
-                console.error("Failed to fetch project metadata:", error);
-                return;
-            }
-        };
-        if (id) fetchProject();
-        else console.error("No project ID provided in URL.");
-    }, [id]);
+    const { data: content, metadata, loading, error } = useContent<Project>(`https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/projects/${id}.md`, `https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/projects.json`);
 
     return (
         <>

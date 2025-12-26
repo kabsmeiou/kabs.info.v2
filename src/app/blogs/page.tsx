@@ -1,49 +1,32 @@
 "use client";
 import { useEffect, useState} from "react";
+import fetchList from "@/api/contentApi";
+import BlogCard from "@/components/BlogCard";
 
-import BlogCard, { Blog } from "@/components/BlogCard";
 
 import { type Blog } from "@/components/BlogCard";
 
 
-const sampleBlogCard: Blog[] = [
-    {
-    id: "1",
-    title: "Sample Blog Post",
-    content: "This is a sample blog post content. It provides insights into various topics related to software development, technology trends, and personal experiences in the tech industry.",
-    publishedDate: "2024-01-01",
-    lastUpdatedDate: "2024-01-02",
-    tags: ["Tech", "Development", "Personal"],
-    readTimeInMinutes: 5
-    },
-    {
-    id: "2",
-    title: "Another Blog Post",
-    content: "This is another sample blog post content. It delves into advanced programming concepts, best practices, and tips for aspiring developers looking to enhance their skills.",
-    publishedDate: "2024-02-15",
-    lastUpdatedDate: "2024-02-16",
-    tags: ["Programming", "Best Practices"],
-    readTimeInMinutes: 8
-    }
-];
-
+// to refactor fetching logic because its similar to projects fetching.
+// todo: create a custom hook for fetching blogs and projects.
+// params: either "blogs" or "projects" URL to determine which to fetch and the state setter functions
 
 export default function Blog() {
+    // call contentApi fetchList
     const [blogs, setBlogs] = useState<Blog[]>([]);
 
     useEffect(() => {
-        fetch(
-            "https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/blogs.json"
-        )
-        .then((res) => res.json())
-        .then((data) => {
+        const fetchBlogs = async () => {
             try {
-                setBlogs(data as Blog[]);
+                const blogsData = await fetchList<Blog>('https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/blogs.json');
+                setBlogs(blogsData);
             } catch (error) {
-                console.error("Failed to load blogs:", error);
+                console.error("Error fetching blogs:", error);
             }
-        })
+        };
+        fetchBlogs();
     }, []);
+
     return (
         <section className="flex flex-col gap-y-8 py-16 px-4">
             <h1 className="text-4xl font-bold text-black dark:text-zinc-50">i might write here, sometimes.</h1>
