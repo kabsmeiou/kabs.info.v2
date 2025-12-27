@@ -1,12 +1,14 @@
 'use client';
 import ProjectCard from '@/components/ProjectCard';
-
 import { Project } from "@/components/ProjectCard";
 import { useEffect, useState } from 'react';
+import FilterButton from '@/components/FilterButton';
 import fetchList from '@/api/contentApi';
 
 export default function Projects() {
     const [projects, setProjects] = useState<Project[]>([]);
+    const [selectedTags, setSelectedTags] = useState<string[] | null>(null);
+
     useEffect(() => {
         const fetchProjects = async () => {
             try {
@@ -18,6 +20,10 @@ export default function Projects() {
         };
         fetchProjects();
     }, []);
+
+    const filteredProjects = selectedTags && selectedTags.length > 0
+        ? projects.filter(project => selectedTags.every(tag => project.tags.includes(tag)))
+        : projects;
     
     return (
         <section className="flex flex-col gap-y-8 py-16 px-4">
@@ -26,17 +32,27 @@ export default function Projects() {
                 <h2 className="text-4xl font-semibold text-black dark:text-zinc-50">
                     graveyard
                 </h2>
-                <span className="self-center bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 px-4 py-2 rounded-full text-sm hover:bg-zinc-300 dark:hover:bg-zinc-700 transition text-xs">
-                    {/* filter component here */}
-                    filter
-                </span>
+                <FilterButton
+                    tags={Array.from(new Set(projects.flatMap(project => project.tags)))}
+                    selectedTags={selectedTags}
+                    onSelect={setSelectedTags} 
+                />
             </div>
+
+            {/* selected tags */}
+            <div className="flex flex-wrap gap-2">
+                {selectedTags && selectedTags.length > 0 && selectedTags.map((tag) => (
+                    <span key={tag} className="bg-primary text-white px-3 py-1 rounded-full text-sm">
+                        {tag}
+                    </span>
+                ))}
+            </div>
+
             {/* loop over project and use ProjectCard on grid with 2 cols*/}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {/* if projects.lenght > 0 */}
-
-                {projects != undefined && projects.length > 0 ? (
-                    projects.map((project) => (
+                {filteredProjects != undefined && filteredProjects.length > 0 ? (
+                    filteredProjects.map((project) => (
                         <ProjectCard key={project.id} project={project} />
                     ))
                 ) : (
