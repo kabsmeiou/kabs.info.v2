@@ -18,7 +18,7 @@ export default function ExperienceCard({ experience }: { experience: Experience 
                         <img 
                             src={experience.companyLogo} 
                             alt={`${experience.company} Logo`} 
-                            className="h-24 w-24 object-contain rounded-full"
+                            className="h-24 w-24 object-contain rounded-full dark:bg-white p-4"
                         />
                     </a>
                 )}

@@ -41,7 +41,7 @@ export default function Home() {
   }, []);
 
   return (
-      <main className="flex w-full max-w-4xl flex-col bg-white dark:bg-black">
+      <main className="flex w-full max-w-4xl flex-col">
         <Navigation />
         {/* hero: (until the github chart) */}
         <section className="flex min-h-screen flex-col items-center sm:items-start space-y-16 px-4 py-32 sm:px-16">
@@ -81,14 +81,14 @@ export default function Home() {
         </section>
 
         {/* about me */}
-        <section className="flex flex-col gap-8 py-16 px-4 sm:px-16">
+        {/* <section className="flex flex-col gap-8 py-16 px-4 sm:px-16">
           <h2 className="text-3xl font-semibold mb-4 text-black dark:text-zinc-50">
               Why I do what I do
           </h2>
           <div className="px-4 border-l ">
 
           </div>
-        </section>
+        </section> */}
       </main>
   );
 }

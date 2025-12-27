@@ -1,6 +1,5 @@
-"use client";
 
-import { usePathname } from 'next/navigation';
+
 import ImageSlider from './ImageSlider';
 
 export interface Project {
@@ -20,20 +19,14 @@ interface ProjectCardProps {
 const ProjectCard = ({
     project
 }: ProjectCardProps) => {
-    // only show slider on root path (for now)
-    const pathname = usePathname();
-    const showSlider = pathname === '/';
-
     return (
         // card container
         <div className="flex md:flex-row flex-col rounded-lg overflow-hidden transition-shadow duration-300 relative hover:shadow-lg hover:border border-zinc-200 dark:border-zinc-800 cursor-pointer">
             <a href={`/projects/${project.id}`} className="absolute inset-0 z-20"></a>
-            <div className="absolute bottom-0 md:top-0 right-0 w-32 h-32 
-                bg-gradient-to-tl md:bg-gradient-to-bl from-primary/20 to-transparent 
-                rounded-tl-full md:rounded-bl-full opacity-50">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full opacity-50">
             </div>
-            {/* Image Slider (only show on root path) */}
-            {showSlider && project.sampleImages && project.sampleImages.length > 0 && (
+            {/* Image Slider */}
+            {project.sampleImages && project.sampleImages.length > 0 && (
                 <ImageSlider images={project.sampleImages} />
             )}
             <div className='flex flex-col'>

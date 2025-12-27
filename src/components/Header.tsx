@@ -1,5 +1,8 @@
 import Image from "next/image";
 
+import github from "@/assets/github.png";
+import linkedin from "@/assets/linkedin.png";
+
 export default function Header() {
     return (
         <div className="flex flex-col gap-8 justify-between w-full">
@@ -22,8 +25,13 @@ export default function Header() {
                 >
                     resume.pdf
                 </a>
-                <Image src="/profile.jpg" alt="Profile Picture" width={32} height={32} className="rounded-md object-cover" />
-                <Image src="/profile.jpg" alt="Profile Picture" width={32} height={32} className="rounded-md object-cover" />
+                <a href="https://github.com/kabsmeiou" target="_blank" rel="noopener noreferrer">
+                  <Image src={github} alt="GitHub Profile" width={32} height={32} className="rounded-md object-cover" />
+                  
+                </a>
+                <a href="https://ph.linkedin.com/in/cvcabral" target="_blank" rel="noopener noreferrer">
+                  <Image src={linkedin} alt="LinkedIn Profile" width={32} height={32} className="rounded-md object-cover" />
+                </a>
             </div>
         </div>
     );
