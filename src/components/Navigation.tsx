@@ -18,7 +18,7 @@ export default function Navigation() {
         <nav className={`sticky top-0 mx-auto max-w-4xl w-full pt-6 px-8 flex justify-center items-center rounded-lg z-50 transition-all duration-300`}>
             <div className={`flex space-x-12 items-center px-6 py-2 rounded-full ${
             isScrolled 
-                ? 'backdrop-blur-sm bg-white/70 dark:bg-zinc-900/70 shadow-lg border-b border-zinc-200/50 dark:border-zinc-800/50' 
+                ? 'backdrop-blur-sm bg-zinc-200/70 dark:bg-zinc-900/70 shadow-lg border-b border-zinc-200/50 dark:border-zinc-800/50' 
                 : ''
         }`}>
                 <a href="/" className="text-xl font-semibold text-black dark:text-zinc-50">
