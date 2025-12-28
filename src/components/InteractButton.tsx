@@ -1,26 +1,33 @@
+"use client";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import heart from "@/assets/heart.png";
 import neko from "@/assets/neko.png";
 import ice from "@/assets/ice.png";
-import React, { useState } from "react";
 
 interface InteractButtonProps {
     buttonType: string;
     cardRef?: React.RefObject<HTMLDivElement | null>;
+    cardId: string;
+    setCount: React.Dispatch<React.SetStateAction<number>>;
+    count: number;
 }
+
+// render once every card, remove the singular rendering for each button
+// or find a way to call db only once per card
+// call all stats for every project then just pass as props to render the project_id values
 
 // three interact buttons: like, catprove, cool. render counts next to each button
 // and add tooltip on hover for each button
 export default function InteractButton({
     buttonType,
-    cardRef
+    cardRef,
+    cardId,
+    setCount,
+    count
 }: InteractButtonProps) {
-    // interact counts (dummy state for now)
-    const [likeCount, setLikeCount] = useState(0);
-    const [catproveCount, setCatproveCount] = useState(0);
-    const [coolCount, setCoolCount] = useState(0);
 
-    const handleInteractClick = (type: string, e: React.MouseEvent<HTMLDivElement>) => {
+    const handleInteractClick = async (type: string, e: React.MouseEvent<HTMLDivElement>) => {
         // compute click position relative to the clicked button so the pop positions correctly
         const targetRect = (e.currentTarget as HTMLElement).getBoundingClientRect();
         const clientX = e.clientX;
@@ -40,22 +47,45 @@ export default function InteractButton({
             setPops((s) => s.filter((p) => p.id !== id));
         }, 750);
 
-        // update interact counts (dummy logic for now)
-        if (type === 'like') setLikeCount((c) => c + 1);
-        else if (type === 'catprove') setCatproveCount((c) => c + 1);
-        else if (type === 'cool') setCoolCount((c) => c + 1);
+        // Optimistically update the state
+        setCount((c) => c + 1);
+        if (count >= 1001) return; // prevent further increments if already 1k+
+        try {
+            const res = await fetch('/api/supabase', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    cardId: cardId, // the current card
+                    type,
+                }),
+            });
+
+            if (!res.ok) {
+            throw new Error('Failed to increment counter');
+            }
+
+            const data = await res.json();
+            console.log('Updated counter:', data);
+        } catch (error) {
+            console.error(error);
+
+            // Optional rollback
+            setCount((c) => c - 1);
+        }
     };
+
     // pop up +1 fading animation on click of interact buttons
     const [pops, setPops] = useState<Array<{ id: string; x: number; y: number; text: string }>>([]);
     
     // buttonType mapping to image and tooltip text
     const buttonData = {
-        like: { image: heart, alt: "heart", tooltip: "Like", count: likeCount },
-        catprove: { image: neko, alt: "catprove", tooltip: "Catprove", count: catproveCount },
-        cool: { image: ice, alt: "cool", tooltip: "Cool", count: coolCount }
+        like: { image: heart, alt: "heart", tooltip: "Like" },
+        catprove: { image: neko, alt: "catprove", tooltip: "Catprove" },
+        cool: { image: ice, alt: "cool", tooltip: "Cool" }
     }[buttonType];
 
     return (
+        // use cardRef 
         <div className='relative flex flex-row gap-2 p-2 items-center select-none' onClick={(e) => handleInteractClick(buttonType, e)}>
             {/* animated +1 pops */}
             {pops.map((p) => (
@@ -73,7 +103,7 @@ export default function InteractButton({
                     {buttonData!.tooltip}
                 </span>
             </div>
-            <p>{buttonData!.count > 1000 ? `1k+` : buttonData!.count}</p>
+            <p>{count > 1000 ? `1k+` : count}</p>
         </div>
     );
 }
