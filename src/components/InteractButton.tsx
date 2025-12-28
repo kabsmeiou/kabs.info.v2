@@ -2,37 +2,78 @@ import Image from "next/image";
 import heart from "@/assets/heart.png";
 import neko from "@/assets/neko.png";
 import ice from "@/assets/ice.png";
+import React, { useState } from "react";
 
 interface InteractButtonProps {
     buttonType: string;
-    interactCount: number;
-    handleInteractClick: (type: string, e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+    cardRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 // three interact buttons: like, catprove, cool. render counts next to each button
 // and add tooltip on hover for each button
 export default function InteractButton({
     buttonType,
-    interactCount,
-    handleInteractClick
+    cardRef
 }: InteractButtonProps) {
+    // interact counts (dummy state for now)
+    const [likeCount, setLikeCount] = useState(0);
+    const [catproveCount, setCatproveCount] = useState(0);
+    const [coolCount, setCoolCount] = useState(0);
 
+    const handleInteractClick = (type: string, e: React.MouseEvent<HTMLDivElement>) => {
+        // compute click position relative to the clicked button so the pop positions correctly
+        const targetRect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+
+        // position inside the button wrapper
+        const x = clientX - targetRect.left;
+        const y = clientY - targetRect.top;
+
+        const id = `${type}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+        const newPop = { id, x, y, text: '+1' };
+
+        setPops((s) => [...s, newPop]);
+
+        // remove after animation (matches globals.css 700ms)
+        setTimeout(() => {
+            setPops((s) => s.filter((p) => p.id !== id));
+        }, 750);
+
+        // update interact counts (dummy logic for now)
+        if (type === 'like') setLikeCount((c) => c + 1);
+        else if (type === 'catprove') setCatproveCount((c) => c + 1);
+        else if (type === 'cool') setCoolCount((c) => c + 1);
+    };
+    // pop up +1 fading animation on click of interact buttons
+    const [pops, setPops] = useState<Array<{ id: string; x: number; y: number; text: string }>>([]);
+    
     // buttonType mapping to image and tooltip text
     const buttonData = {
-        like: { image: heart, alt: "heart", tooltip: "Like"},
-        catprove: { image: neko, alt: "catprove", tooltip: "Catprove" },
-        cool: { image: ice, alt: "cool", tooltip: "Cool" }
+        like: { image: heart, alt: "heart", tooltip: "Like", count: likeCount },
+        catprove: { image: neko, alt: "catprove", tooltip: "Catprove", count: catproveCount },
+        cool: { image: ice, alt: "cool", tooltip: "Cool", count: coolCount }
     }[buttonType];
 
     return (
-        <div className='flex flex-row gap-2 p-2 items-center select-none' onClick={(e) => handleInteractClick(buttonType, e)}>
+        <div className='relative flex flex-row gap-2 p-2 items-center select-none' onClick={(e) => handleInteractClick(buttonType, e)}>
+            {/* animated +1 pops */}
+            {pops.map((p) => (
+                <span
+                    key={p.id}
+                    className="pop-up pop-text text-[var(--color-primary)] dark:text-white z-40"
+                    style={{ left: `${p.x}px`, top: `${p.y}px` }}
+                >
+                    {p.text}
+                </span>
+            ))} 
             <div className="relative group inline-flex">
                 <Image src={buttonData!.image} alt={buttonData!.alt} className='w-6 h-6' />
                 <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded text-xs bg-zinc-900 text-white opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-opacity dark:bg-zinc-100 dark:text-black">
                     {buttonData!.tooltip}
                 </span>
             </div>
-            <p>{interactCount > 1000 ? `1k+` : interactCount}</p>
+            <p>{buttonData!.count > 1000 ? `1k+` : buttonData!.count}</p>
         </div>
     );
 }
