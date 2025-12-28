@@ -1,6 +1,11 @@
-
-
+import Image from 'next/image';
+import { useRef, useState, type MouseEvent } from 'react';
 import ImageSlider from './ImageSlider';
+import ice from "@/assets/ice.png";
+import heart from "@/assets/heart.png";
+import neko from "@/assets/neko.png";
+import InteractButton from './InteractButton';
+import { Inter } from 'next/font/google';
 
 export interface Project {
     id: string;
@@ -19,28 +24,73 @@ interface ProjectCardProps {
 const ProjectCard = ({
     project
 }: ProjectCardProps) => {
+    const cardRef = useRef<HTMLDivElement | null>(null);
+
+    // pop up +1 fading animation on click of interact buttons
+    const [pops, setPops] = useState<Array<{ id: string; x: number; y: number; text: string }>>([]);
+    
+    // interact counts (dummy state for now)
+    const [likeCount, setLikeCount] = useState(0);
+    const [catproveCount, setCatproveCount] = useState(0);
+    const [coolCount, setCoolCount] = useState(0);
+
+    const handleInteractClick = (type: string, e: MouseEvent) => {
+        // compute click position relative to card so we can position the +1
+        const rect = cardRef.current?.getBoundingClientRect();
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+
+        const x = rect ? clientX - rect.left : 0;
+        const y = rect ? clientY - rect.top : 0;
+
+        const id = `${type}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+        const newPop = { id, x, y, text: '+1' };
+
+        setPops((s) => [...s, newPop]);
+
+        // remove after animation (matches globals.css 700ms)
+        setTimeout(() => {
+            setPops((s) => s.filter((p) => p.id !== id));
+        }, 750);
+
+        // update interact counts (dummy logic for now)
+        if (type === 'like') setLikeCount((c) => c + 1);
+        else if (type === 'catprove') setCatproveCount((c) => c + 1);
+        else if (type === 'cool') setCoolCount((c) => c + 1);
+    };
+
     return (
         // card container
-        <div className="flex md:flex-row flex-col rounded-lg overflow-hidden transition-shadow duration-300 relative hover:shadow-lg hover:border border-zinc-200 dark:border-zinc-800 cursor-pointer">
-            <a href={`/projects/${project.id}`} className="absolute inset-0 z-20"></a>
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full opacity-50">
+        <div ref={cardRef} className="flex md:flex-row flex-col rounded-lg overflow-hidden transition-shadow duration-300 relative hover:shadow-lg hover:border border-zinc-200 dark:border-zinc-800 cursor-pointer">
+            {/* animated +1 pops */}
+            {pops.map((p) => (
+                <span
+                    key={p.id}
+                    className="pop-up pop-text text-[var(--color-primary)] dark:text-white z-40"
+                    style={{ left: `${p.x}px`, top: `${p.y}px` }}
+                >
+                    {p.text}
+                </span>
+            ))}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full opacity-50 z-20 pointer-events-none">
             </div>
             {/* Image Slider */}
             {project.sampleImages && project.sampleImages.length > 0 && (
                 <ImageSlider images={project.sampleImages} />
             )}
-            <div className='flex flex-col'>
+            <div className='flex flex-col relative z-30'>
                 {/* Content Container */}
-                <div className="p-6">
+                <div className="flex flex-col p-6">
+                    
                     {/* Project Title */}
-                    <h3 className="text-xl font-semibold mb-2 text-black dark:text-zinc-50">
+                    <a href={`/projects/${project.id}`} className="text-xl font-semibold mb-2 text-black dark:text-zinc-50">
                         {project.name}
-                    </h3>
+                    </a>
 
                     {/* Project Description */}
-                    <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+                    <a href={`/projects/${project.id}`} className="text-zinc-600 dark:text-zinc-400 mb-4">
                         {project.description}
-                    </p>
+                    </a>
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-4">
@@ -55,10 +105,22 @@ const ProjectCard = ({
                     </div>
                     
                     <div className="w-full flex flex-row gap-x-8 py-2">
-                        {/* interact buttons (like, cat, clap) */}
-                        <span>Like</span>
-                        <span>Cat</span>
-                        <span>Clap </span>
+                        {/* interact buttons (heart, cat, cool) */}
+                        <InteractButton
+                            buttonType='like'
+                            interactCount={likeCount}
+                            handleInteractClick={handleInteractClick}
+                        />
+                        <InteractButton
+                            buttonType='catprove'
+                            interactCount={catproveCount}
+                            handleInteractClick={handleInteractClick}
+                        />
+                        <InteractButton
+                            buttonType='cool'
+                            interactCount={coolCount}
+                            handleInteractClick={handleInteractClick}
+                        />
                     </div>
 
                     {/* GitHub Link */}
