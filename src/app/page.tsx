@@ -32,7 +32,34 @@ export default function Home() {
     const fetchRecentProjects = async () => {
       try {
         const projectsData = await fetchList<Project>('https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/projects.json');
-        setRecentProjects(projectsData.slice(0, 2)); // get first 2 projects
+
+        const ids = projectsData.map(project => project.id);
+        const query = ids.map(id => `id=${id}`).join('&');
+
+        const res = await fetch(`/api/supabase?${query}`);
+        if (!res.ok) throw new Error("Failed to fetch interactions data");
+
+        const interactionsData = await res.json();
+
+        // normalize interactions data by card_id for easier lookup
+        const interactionMap: Record<string, any> = {};
+        interactionsData.forEach((row: any) => {
+          interactionMap[row.card_id] = row;
+        });
+        console.log("Normalized interaction map:", interactionMap);
+
+        const mergedProjects = projectsData.map(project => {
+            const interaction = interactionMap[project.id];
+
+            return {
+            ...project,
+            likeCount: interaction?.like_count ?? 0,
+            catproveCount: interaction?.catprove_count ?? 0,
+            coolCount: interaction?.cool_count ?? 0,
+            };
+        });
+
+        setRecentProjects(mergedProjects.slice(0, 2));
       } catch (error) {
         console.error("Error fetching recent projects:", error);
       }
@@ -46,7 +73,6 @@ export default function Home() {
         {/* hero: (until the github chart) */}
         <section className="flex min-h-screen flex-col items-center sm:items-start space-y-16 px-4 py-32 sm:px-16">
           <Header />
-          {/* GitHub Chart - mt-auto pushes this to the bottom of the section */}
           <div className="w-full sm:mt-auto sm:pt-12">
             <GithubChart />
           </div>

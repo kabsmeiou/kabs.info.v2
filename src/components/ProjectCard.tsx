@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import ImageSlider from './ImageSlider';
 import InteractButton from './InteractButton';
 
@@ -10,6 +10,9 @@ export interface Project {
     tags: string[];
     githubLink?: string;
     sampleImages?: string[];
+    likeCount?: number;
+    catproveCount?: number;
+    coolCount?: number;
 }
 
 interface ProjectCardProps {
@@ -21,6 +24,9 @@ const ProjectCard = ({
     project
 }: ProjectCardProps) => {
     const cardRef = useRef<HTMLDivElement | null>(null);
+    const [likeCount, setLikeCount] = useState(project.likeCount ?? 0);
+    const [catproveCount, setCatproveCount] = useState(project.catproveCount ?? 0);
+    const [coolCount, setCoolCount] = useState(project.coolCount ?? 0);
 
     return (
         // card container
@@ -62,14 +68,23 @@ const ProjectCard = ({
                         <InteractButton
                             buttonType='like'
                             cardRef={cardRef}
+                            cardId={project.id}
+                            setCount={setLikeCount}
+                            count={likeCount}
                         />
                         <InteractButton
                             buttonType='catprove'
                             cardRef={cardRef}
+                            cardId={project.id}
+                            setCount={setCatproveCount}
+                            count={catproveCount}
                         />
                         <InteractButton
                             buttonType='cool'
                             cardRef={cardRef}
+                            cardId={project.id}
+                            setCount={setCoolCount}
+                            count={coolCount}
                         />
                     </div>
 
