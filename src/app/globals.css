@@ -119,3 +119,28 @@ body {
 .markdown-content img {
   @apply max-w-full h-auto rounded-lg my-4;
 }
+
+/* +1 pop animation used by ProjectCard interact buttons */
+@keyframes pop-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-28px) scale(1.03);
+  }
+}
+
+.pop-up {
+  animation: pop-up 700ms cubic-bezier(.2,.8,.2,1) forwards;
+  pointer-events: none;
+  position: absolute;
+  transform-origin: center;
+  white-space: nowrap;
+}
+
+.pop-text {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
