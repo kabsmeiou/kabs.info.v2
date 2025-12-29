@@ -18,7 +18,7 @@ export default function Header() {
             <div className="flex items-center justify-center md:justify-start gap-x-4">
                 {/* Resume Link */}
                 <a
-                    href="/Christian_Cabral_Resume.pdf"
+                    href="https://kabsmeiou.github.io/content/pdf/resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rounded-lg px-4 py-2 dark:text-white text-black border border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"
