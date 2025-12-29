@@ -9,6 +9,7 @@ import { Experience } from "@/components/ExperienceCard";
 import { Project } from "@/components/ProjectCard";
 
 import fetchList from "@/api/contentApi";
+import { fetchProjectsWithInteractions } from "./lib/fetchProjectInteractionData";
 
 export default function Home() {
   const [experiences, setExperiences] = useState<Experience[]>([]);
@@ -26,42 +27,14 @@ export default function Home() {
     fetchExperiences();
   }, []);
 
-  // fetch 2 recent projects from projects.json
   const [recentProjects, setRecentProjects] = useState<Project[]>([]);
   useEffect(() => {
     const fetchRecentProjects = async () => {
       try {
-        const projectsData = await fetchList<Project>('https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/projects.json');
-
-        const ids = projectsData.map(project => project.id);
-        const query = ids.map(id => `id=${id}`).join('&');
-
-        const res = await fetch(`/api/supabase?${query}`);
-        if (!res.ok) throw new Error("Failed to fetch interactions data");
-
-        const interactionsData = await res.json();
-
-        // normalize interactions data by card_id for easier lookup
-        const interactionMap: Record<string, any> = {};
-        interactionsData.forEach((row: any) => {
-          interactionMap[row.card_id] = row;
-        });
-        console.log("Normalized interaction map:", interactionMap);
-
-        const mergedProjects = projectsData.map(project => {
-            const interaction = interactionMap[project.id];
-
-            return {
-            ...project,
-            likeCount: interaction?.like_count ?? 0,
-            catproveCount: interaction?.catprove_count ?? 0,
-            coolCount: interaction?.cool_count ?? 0,
-            };
-        });
-
-        setRecentProjects(mergedProjects.slice(0, 2));
+        const projectsData = await fetchProjectsWithInteractions(2); // sliced to 2 recent projects
+        setRecentProjects(projectsData);
       } catch (error) {
-        console.error("Error fetching recent projects:", error);
+        console.error("Error fetching projects:", error);
       }
     };
     fetchRecentProjects();

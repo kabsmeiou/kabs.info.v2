@@ -3,52 +3,25 @@ import ProjectCard from '@/components/ProjectCard';
 import { Project } from "@/components/ProjectCard";
 import { useEffect, useState } from 'react';
 import FilterButton from '@/components/FilterButton';
-import fetchList from '@/api/contentApi';
+import { fetchProjectsWithInteractions } from '../lib/fetchProjectInteractionData';
 
 export default function Projects() {
     const [projects, setProjects] = useState<Project[]>([]);
     const [selectedTags, setSelectedTags] = useState<string[] | null>(null);
 
+    // fetch projects with interactions on component mount
     useEffect(() => {
-    const fetchProjects = async () => {
-        try {
-            const projectsData = await fetchList<Project>(
-                'https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/projects.json'
-            );
-
-            const ids = projectsData.map(project => project.id);
-            const query = ids.map(id => `id=${id}`).join('&');
-
-            const res = await fetch(`/api/supabase?${query}`);
-            if (!res.ok) throw new Error("Failed to fetch interactions data");
-
-            const interactionsData = await res.json();
-
-            // normalize then merge with content data
-            const interactionMap: Record<string, any> = {};
-            interactionsData.forEach((row: any) => {
-                interactionMap[row.card_id] = row;
-            });
-
-            const mergedProjects = projectsData.map(project => {
-                const interaction = interactionMap[project.id];
-
-                return {
-                ...project,
-                likeCount: interaction?.like_count ?? 0,
-                catproveCount: interaction?.catprove_count ?? 0,
-                coolCount: interaction?.cool_count ?? 0,
-                };
-            });
-
-            setProjects(mergedProjects);
-        } catch (error) {
-            console.error("Error fetching projects/interactions:", error);
-        }
-    };
-
-    fetchProjects();
+        const fetchData = async () => {
+            try {
+                const projectsData = await fetchProjectsWithInteractions();
+                setProjects(projectsData);
+            } catch (error) {
+                console.error("Error fetching projects:", error);
+            }
+        };
+        fetchData();
     }, []);
+    
 
     const filteredProjects = selectedTags && selectedTags.length > 0
         ? projects.filter(project => selectedTags.every(tag => project.tags.includes(tag)))
