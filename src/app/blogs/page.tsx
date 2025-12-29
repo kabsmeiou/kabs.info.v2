@@ -1,14 +1,12 @@
 "use client";
+
 import { useEffect, useState} from "react";
-import fetchList from "@/api/contentApi";
-import BlogCard from "@/components/BlogCard";
-import FilterButton from "@/components/FilterButton";
-import { type Blog } from "@/components/BlogCard";
 
+import BlogCard from "@/app/components/BlogCard";
+import fetchList from "@/app/lib/fetchList";
+import FilterButton from "@/app/components/FilterButton";
 
-// to refactor fetching logic because its similar to projects fetching.
-// todo: create a custom hook for fetching blogs and projects.
-// params: either "blogs" or "projects" URL to determine which to fetch and the state setter functions
+import { type Blog } from "@/app/components/BlogCard";
 
 export default function Blog() {
     // call contentApi fetchList

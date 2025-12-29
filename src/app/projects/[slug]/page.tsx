@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
-import useContent from "@/hooks/useContent";
 
-import { Project } from "@/components/ProjectCard";
+import { useParams } from "next/navigation";
+
+import MarkdownRenderer from "@/app/components/MarkdownRenderer";
+import useContent from "@/app/hooks/useContent";
+
+import { type Project } from "@/app/components/ProjectCard";
 
 export default function ProjectView() {
     const id = useParams<{ id: string }>().slug;

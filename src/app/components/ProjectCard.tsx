@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
+
 import ImageSlider from './ImageSlider';
 import InteractButton from './InteractButton';
-
 
 export interface Project {
     id: string;

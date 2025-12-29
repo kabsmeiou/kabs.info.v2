@@ -1,6 +1,6 @@
-import fetchList from "@/api/contentApi";
-import { Project } from "@/components/ProjectCard";
+import fetchList from "@/app/lib/fetchList";
 
+import { Project } from "@/app/components/ProjectCard";
 
 export async function fetchProjectsWithInteractions(
     limit?: number,

@@ -1,11 +1,11 @@
-// /blog/[id] route
 "use client";
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
-import useContent from "@/hooks/useContent";
 
-import { Blog } from "@/components/BlogCard";
+import { useParams } from "next/navigation";
+
+import MarkdownRenderer from "@/app/components/MarkdownRenderer";
+import useContent from "@/app/hooks/useContent";
+
+import { type Blog } from "@/app/components/BlogCard";
 
 export default function BlogPostPage() {
     const id = useParams<{ id: string }>().slug;

@@ -1,9 +1,12 @@
 'use client';
-import ProjectCard from '@/components/ProjectCard';
-import { Project } from "@/components/ProjectCard";
+
 import { useEffect, useState } from 'react';
-import FilterButton from '@/components/FilterButton';
+
 import { fetchProjectsWithInteractions } from '../lib/fetchProjectInteractionData';
+import FilterButton from '@/app/components/FilterButton';
+import ProjectCard from '@/app/components/ProjectCard';
+
+import { type Project } from "@/app/components/ProjectCard";
 
 export default function Projects() {
     const [projects, setProjects] = useState<Project[]>([]);
