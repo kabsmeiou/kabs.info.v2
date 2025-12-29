@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import linkedin from "@/app/assets/linkedin.png";
-import github from "@/app/assets/github.png";
+import linkedin from "@/app/assets/linkedin.webp";
+import github from "@/app/assets/github.webp";
 
 export default function Header() {
     return (

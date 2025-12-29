@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import heart from "@/app/assets/heart.png";
-import neko from "@/app/assets/neko.png";
-import ice from "@/app/assets/ice.png";
+import heart from "@/app/assets/heart.webp";
+import neko from "@/app/assets/neko.webp";
+import ice from "@/app/assets/ice.webp";
 
 interface InteractButtonProps {
     buttonType: string;
