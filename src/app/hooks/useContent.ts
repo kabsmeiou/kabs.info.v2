@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 
 // custom hook for fetching content and metadata for projects/blogs

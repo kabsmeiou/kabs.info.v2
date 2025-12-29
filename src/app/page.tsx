@@ -1,15 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
-import GithubChart from "@/components/Github";
-import Navigation from "@/components/Navigation";
-import Header from "@/components/Header";
-import ProjectCard from "@/components/ProjectCard";
-import ExperienceCard from "@/components/ExperienceCard";
-import { Experience } from "@/components/ExperienceCard";
-import { Project } from "@/components/ProjectCard";
 
-import fetchList from "@/api/contentApi";
+import { useEffect, useState } from "react";
+
+import ExperienceCard from "@/app/components/ExperienceCard";
 import { fetchProjectsWithInteractions } from "./lib/fetchProjectInteractionData";
+import fetchList from "@/app/lib/fetchList";
+import GithubChart from "@/app/components/Github";
+import Header from "@/app/components/Header";
+import Navigation from "@/app/components/Navigation";
+import ProjectCard from "@/app/components/ProjectCard";
+
+import { type Experience } from "@/app/components/ExperienceCard";
+import { type Project } from "@/app/components/ProjectCard";
 
 export default function Home() {
   const [experiences, setExperiences] = useState<Experience[]>([]);

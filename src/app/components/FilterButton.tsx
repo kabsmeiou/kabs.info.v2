@@ -1,6 +1,3 @@
-
-
-// dropdown filter button containing the tags available in projects/blogs page
 'use client';
 
 import { useState } from 'react';

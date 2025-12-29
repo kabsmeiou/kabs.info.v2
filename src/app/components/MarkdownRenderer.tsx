@@ -2,9 +2,9 @@
 import { type ComponentPropsWithoutRef, useEffect, useState} from "react";
 import Markdown from 'react-markdown';
 // @ts-ignore
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-// @ts-ignore
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+// @ts-ignore
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
