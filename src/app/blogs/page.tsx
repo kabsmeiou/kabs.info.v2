@@ -30,7 +30,11 @@ export default function Blog() {
             <div className="flex flex-row justify-between">
                 <h1 className="text-4xl font-bold text-black dark:text-zinc-50">i might write here, sometimes.</h1> 
                 <FilterButton
-                    tags={Array.from(new Set(blogs.flatMap(blog => blog.tags)))}
+                    tags={Array.from(
+                        new Set(
+                            blogs.flatMap(blog => blog.tags ?? []).filter((t): t is string => t !== undefined)
+                        )
+                    )}
                     selectedTags={selectedTags}
                     onSelect={setSelectedTags} 
                 />

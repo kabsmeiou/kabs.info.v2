@@ -8,7 +8,9 @@ import useContent from "@/app/hooks/useContent";
 import { type Project } from "@/app/components/ProjectCard";
 
 export default function ProjectView() {
-    const id = useParams<{ id: string }>().slug;
+    const id = useParams<{
+        slug: any; id: string 
+    }>().slug;
     const { data: content, metadata, loading, error } = useContent<Project>(`https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/projects/${id}.md`, `https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/projects.json`);
 
     return (
