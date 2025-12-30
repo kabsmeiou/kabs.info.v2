@@ -27,7 +27,10 @@ export async function fetchProjectsWithInteractions(
         interactionMap[row.card_id] = row;
     });
 
-    // merge data
+    // remove unneeded projects if limit is set before mapping
+    if (limit) {
+        projectsData.splice(limit);
+    }
     return projectsData.map(project => {
         const interaction = interactionMap[project.id];
 
