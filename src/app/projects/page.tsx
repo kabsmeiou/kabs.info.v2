@@ -16,7 +16,7 @@ export default function Projects() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const projectsData = await fetchProjectsWithInteractions(2);
+                const projectsData = await fetchProjectsWithInteractions();
                 setProjects(projectsData);
             } catch (error) {
                 console.error("Error fetching projects:", error);
