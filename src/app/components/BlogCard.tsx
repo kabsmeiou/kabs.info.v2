@@ -18,7 +18,7 @@ export default function BlogCard(props: Blog) {
             <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-transparent transition-opacity duration-600 opacity-50 group-hover:opacity-0 pointer-events-none rounded-xl rounded-bl-[3rem] rounded-br-[3rem]"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent transition-opacity duration-600 opacity-0 group-hover:opacity-50 pointer-events-none rounded-xl rounded-bl-[3rem] rounded-br-[3rem]"></div>
             <div className="relative flex flex-col box-content gap-y-2 p-4 rounded-xl z-10">
-                <h3 className="text-2xl font-semibold text-black dark:text-zinc-50">{props.title}</h3>
+                <h3 className="font-code text-2xl font-semibold text-black dark:text-zinc-50">{props.title}</h3>
                 <p className="text-zinc-700 dark:text-zinc-300">
                     {props.content.slice(0, 150)}...
                 </p>

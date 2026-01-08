@@ -99,7 +99,7 @@ function CodeBlock({
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     return (
-        <section className="markdown-content">
+        <section className="markdown-content whitespace-pre-line">
             <Markdown
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}

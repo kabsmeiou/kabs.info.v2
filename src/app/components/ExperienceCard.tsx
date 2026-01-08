@@ -10,6 +10,7 @@ export interface Experience {
 }
 
 export default function ExperienceCard({ experience }: { experience: Experience }) {
+    console.log(experience.description)
     return (
         <div className="flex flex-row hover:border border-zinc-200 dark:border-zinc-800 rounded-lg p-6 mb-6 gap-8">
             <div className="flex flex-col w-1/4 gap-2 items-center justify-center">
@@ -36,7 +37,7 @@ export default function ExperienceCard({ experience }: { experience: Experience 
                     <span
                         className="text-sm bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 px-2 py-1 rounded-full hover:bg-zinc-300 dark:hover:bg-zinc-700 transition"
                     >
-                        <a href={experience.companyLink} target="_blank" rel="noopener noreferrer">View website -&gt;</a>
+                        <a href={experience.companyLink} target="_blank" rel="noopener noreferrer">recon ⊱  ۫ ׅ ✧</a>
                     </span>
                 </div>
             </div>

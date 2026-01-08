@@ -34,7 +34,7 @@ export default function Projects() {
         <section className="flex flex-col gap-y-8 py-16 px-4">
             {/* filter button */}
             <div className="flex flex-row justify-between">
-                <h2 className="text-4xl font-semibold text-black dark:text-zinc-50">
+                <h2 className="font-code text-4xl font-semibold text-black dark:text-zinc-50">
                     graveyard
                 </h2>
                 <FilterButton

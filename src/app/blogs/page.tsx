@@ -28,7 +28,7 @@ export default function Blog() {
     return (
         <section className="flex flex-col gap-y-8 py-16 px-4">
             <div className="flex flex-row justify-between">
-                <h1 className="text-4xl font-bold text-black dark:text-zinc-50">i might write here, sometimes.</h1> 
+                <h1 className="font-code text-4xl font-bold text-black dark:text-zinc-50">i might write here, sometimes.</h1> 
                 <FilterButton
                     tags={Array.from(
                         new Set(

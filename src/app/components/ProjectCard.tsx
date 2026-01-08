@@ -42,13 +42,13 @@ const ProjectCard = ({
                 <div className="flex flex-col p-6">
                     
                     {/* Project Title */}
-                    <a href={`/projects/${project.id}`} className="text-xl font-semibold mb-2 text-black dark:text-zinc-50">
+                    <a href={`/projects/${project.id}`} className="font-code text-xl font-semibold mb-2 text-black dark:text-zinc-50">
                         {project.name}
                     </a>
 
                     {/* Project Description */}
                     <a href={`/projects/${project.id}`} className="text-zinc-600 dark:text-zinc-400 mb-4">
-                        {project.description}
+                    &gt; {project.description}
                     </a>
 
                     {/* Tags */}
