@@ -7,13 +7,13 @@ export default function Header() {
     return (
         <div className="flex flex-col gap-8 justify-between w-full">
             <div className="flex flex-col items-center w-full gap-4 text-center sm:items-start sm:text-left">
-              <h1 className="font-code text-left text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+              <h1 className="font-code text-left text-xl sm:text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
                 ˚˖𓍢ִ໋❀ Christian Cabral ⟡ ݁₊ .
               </h1>
               <p className="text-justify leading-8 text-zinc-600 font-bold dark:text-zinc-100">
                 &gt; I was supposed to be a 4 ft tall wizard wearing an inconceivably large pointy hat with a helper black cat living in a mushroom-shaped house in a forest that goes by the name of Altheragea or something of the sort, but I ended up being a software engineer in an era of code-writing machines. 
               </p>
-              <p className="text-justify leading-8 text-zinc-900 font-bold dark:text-zinc-100">
+              <p className="text-sm sm:text-lg text-justify leading-8 text-zinc-900 font-bold dark:text-zinc-100">
                 &gt; In any case, feel free to send an electronic mail for collaborations, projects, or research on alchemy for eternal life. ⋆˚࿔
               </p>
             </div>
