@@ -54,14 +54,14 @@ export default function Navigation() {
                 ? 'backdrop-blur-sm bg-zinc-200/60 dark:bg-zinc-900/70 shadow-lg border-b border-zinc-200/50 dark:border-zinc-800/50' 
                 : ''
         }`}>
-                <a href="/" className="text-sm sm:text-xl text-black dark:text-zinc-50">
+                <a href="/" className={`text-sm sm:text-base text-zinc-700 dark:text-zinc-300 hover:text-[var(--color-primary)] transition-colors ${pathname?.startsWith('/') && pathname?.endsWith('/') ? 'font-bold' : ''}`}>
                     <span className="hidden sm:inline">Kabs / </span>カブス
                 </a>
-                <a href="/projects" className={`text-sm sm:text-base text-zinc-700 dark:text-zinc-300 hover:text-[var(--color-primary)] transition-colors ${pathname?.startsWith('/projects') ? 'font-semibold' : ''}`}>
+                <a href="/projects" className={`text-sm sm:text-base text-zinc-700 dark:text-zinc-300 hover:text-[var(--color-primary)] transition-colors ${pathname?.startsWith('/projects') ? 'font-bold' : ''}`}>
                     {/* if sm dont show graveyard */}
                     <span className="hidden sm:inline">graveyard / </span>墓地
                 </a>
-                <a href="/blogs" className={`text-sm sm:text-base text-zinc-700 dark:text-zinc-300 hover:text-[var(--color-primary)] transition-colors ${pathname?.startsWith('/blogs') ? 'font-semibold' : ''}`}>
+                <a href="/blogs" className={`text-sm sm:text-base text-zinc-700 dark:text-zinc-300 hover:text-[var(--color-primary)] transition-colors ${pathname?.startsWith('/blogs') ? 'font-bold' : ''}`}>
                     <span className="hidden sm:inline">notes / </span>メモ
                 </a>
                 {/* <p>.ᐟ .ᐟ .𖥔 ݁ ˖</p> */}
