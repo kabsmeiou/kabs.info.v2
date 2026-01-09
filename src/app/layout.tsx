@@ -29,7 +29,7 @@ const googleSansCode = Google_Sans_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Kabs.info",
+  title: "Christian Cabral₍^. .^₎⟆",
   description: "Hello, world!",
 };
 

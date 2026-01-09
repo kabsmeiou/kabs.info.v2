@@ -10,7 +10,6 @@ export interface Experience {
 }
 
 export default function ExperienceCard({ experience }: { experience: Experience }) {
-    console.log(experience.description)
     return (
         <div className="flex flex-row hover:border border-zinc-200 dark:border-zinc-800 rounded-lg p-6 mb-6 gap-8">
             <div className="flex flex-col w-1/4 gap-2 items-center justify-center">
