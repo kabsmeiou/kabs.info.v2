@@ -69,6 +69,7 @@ const GitHubChart: React.FC<GitHubChartProps> = ({
           fill
           unoptimized // Required because this external service returns a dynamic SVG
           className={`${className} object-contain`}
+          loading='eager'
         />
       </div>
     </div>
