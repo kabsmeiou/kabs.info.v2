@@ -29,8 +29,38 @@ const googleSansCode = Google_Sans_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Christian Cabral₍^. .^₎⟆",
-  description: "Hello, world!",
+  metadataBase: new URL("https://kabsmeiou.space"),
+  title: "Christian Cabral (Kabsmeiou) - Builder Portfolio",
+  description: "Christian Cabral (kabsmeiou) - software engineer building scalabl backend systems with Python technologies",
+  keywords: ['Christian Cabral', 'kabsmeiou', 'カブス', 'software engineer', 'backend developer', 'Python', 'Django', 'Flask', 'FastAPI', 'machine learning', 'AI', 'projects', 'portfolio'],
+  authors: [{ name: "Christian Cabral", url: "https://kabsmeiou.space" }],
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "Christian Cabral | kabsmeiou | カブス - Portfolio",
+    description: "Christian Cabral (kabsmeiou) - software engineer building scalabl backend systems with Python technologies",
+    url: "https://kabsmeiou.space",
+    siteName: "Christian Cabral Portfolio",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Christian Cabral (kabsmeiou) Open Graph Image",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Christian Cabral (kabsmeiou) | Backend Engineer",
+    description:
+      "Backend-focused software engineer building scalable systems with Python, FastAPI, and Django.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
