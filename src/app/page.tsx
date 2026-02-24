@@ -54,10 +54,10 @@ export default function Home() {
           <Header />
           <div className="font-code grid grid-cols-2 sm:grid-cols-3 gap-4 mt-12 w-full">
             <p className="text-zinc-600 dark:text-zinc-400">
-              &gt; python / fastapi / django
+              &gt; python / typescript / rust
             </p>
             <p className="text-zinc-600 dark:text-zinc-400">
-              &gt; typescript / nextjs / react
+              &gt; django / nextjs / fastapi
             </p>
             <p className="text-zinc-600 dark:text-zinc-400">
               &gt; ml / pytorch / tensorflow
