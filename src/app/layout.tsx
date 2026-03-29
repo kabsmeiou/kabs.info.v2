@@ -77,7 +77,7 @@ export default function RootLayout({
           ${saira.variable}
           antialiased`}
       >
-      <div className="flex font-saira min-h-screen justify-center dark:bg-black">
+      <div className="flex font-saira min-h-screen justify-center dark:bg-black w-full overflow-x-hidden">
         {children}
       </div>
       </body>

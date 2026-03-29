@@ -73,7 +73,7 @@ function CodeBlock({
   };
 
   return (
-    <div className="relative group">
+    <div className="relative group overflow-x-auto max-w-full">
       <button
         type="button"
         onClick={handleCopy}
@@ -89,6 +89,8 @@ function CodeBlock({
         customStyle={{
           borderRadius: "0.5rem",
           margin: 0,
+          overflowX: "auto",
+          maxWidth: "100%",
         }}
       >
         {children}
@@ -99,7 +101,7 @@ function CodeBlock({
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     return (
-        <section className="markdown-content whitespace-pre-line">
+        <section className="markdown-content min-w-0 w-full">
             <Markdown
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}

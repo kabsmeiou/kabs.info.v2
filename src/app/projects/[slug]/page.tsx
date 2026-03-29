@@ -15,8 +15,8 @@ export default function ProjectView() {
 
     return (
         <>
-            <section className="flex flex-col gap-y-8 py-16 px-4 sm:px-16 max-w-4xl mx-auto">
-                <h1 className="text-4xl font-semibold text-black dark:text-zinc-50 text-center">
+            <section className="flex flex-col gap-y-8 py-16 px-4 sm:px-16 w-full max-w-4xl mx-auto">
+                <h1 className="text-2xl sm:text-4xl font-semibold text-black dark:text-zinc-50 text-center">
                     {metadata ? metadata.name : "Loading..."}
                 </h1>
                 <MarkdownRenderer content={content} />

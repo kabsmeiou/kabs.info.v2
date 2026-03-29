@@ -36,12 +36,12 @@ export default function BlogPostPage() {
 
     return (
         <>
-            <section className="flex flex-col gap-y-8 py-16 px-4 sm:px-16 max-w-4xl mx-auto">
+            <section className="flex flex-col gap-y-8 py-16 px-4 sm:px-16 w-full max-w-4xl mx-auto">
                 <h1 className="text-4xl font-semibold text-black dark:text-zinc-50 text-center">
                     {metadata ? metadata.title : "Loading..."}
                 </h1>
                 <MarkdownRenderer content={content} />
-                <div className="flex flex-row gap-x-8 py-2 px-4 items-center">
+                <div className="flex flex-wrap gap-x-8 gap-y-3 py-2 px-4 items-center">
                     <p className="text-zinc-600 dark:text-zinc-400 text-sm">
                         Did you like this post? Let me know!
                     </p>
