@@ -1,10 +1,8 @@
-import MarkdownRenderer from "./MarkdownRenderer";
-
 export interface Experience {
     role: string;
     company: string;
     duration: string;
-    description: string;
+    description: string[];
     companyLogo?: string;
     companyLink?: string;
 }
@@ -31,7 +29,14 @@ export default function ExperienceCard({ experience }: { experience: Experience 
                 <h5 className="text-zinc-700 dark:text-zinc-300">
                     {experience.role}
                 </h5>
-                <MarkdownRenderer content={experience.description} />
+                {/* display list of description */}
+                <ul className="list-disc list-inside text-zinc-600 dark:text-zinc-400">
+                    {experience.description.map((point, index) => (
+                        <li key={index} className="text-sm">
+                            {point}
+                        </li>
+                    ))}
+                </ul>
                 <div className="flex flex-wrap gap-2">
                     <span
                         className="text-sm bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 px-2 py-1 rounded-full hover:bg-zinc-300 dark:hover:bg-zinc-700 transition"
