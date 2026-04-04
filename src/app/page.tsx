@@ -2,36 +2,17 @@
 
 import { useEffect, useState } from "react";
 
-import ExperienceCard from "@/app/components/ExperienceCard";
 import { fetchProjectsWithInteractions } from "./lib/fetchProjectInteractionData";
-import fetchList from "@/app/lib/fetchList";
 import GithubChart from "@/app/components/Github";
 import Header from "@/app/components/Header";
 import Navigation from "@/app/components/Navigation";
 import ProjectCard from "@/app/components/ProjectCard";
 import Loading from "@/app/components/Loading";
 
-import { type Experience } from "@/app/components/ExperienceCard";
 import { type Project } from "@/app/components/ProjectCard";
 
 export default function Home() {
-  const [experiences, setExperiences] = useState<Experience[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  // fetch experiences from experiences.json
-  useEffect(() => {
-    const fetchExperiences = async () => {
-      try {
-        setIsLoading(true);
-        const experiencesData = await fetchList<Experience>('https://raw.githubusercontent.com/kabsmeiou/kabsmeiou.github.io/refs/heads/main/content/experiences.json');
-        setExperiences(experiencesData);
-      } catch (error) {
-        console.error("Error fetching experiences:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchExperiences();
-  }, []);
 
   const [recentProjects, setRecentProjects] = useState<Project[]>([]);
   useEffect(() => {
@@ -41,6 +22,8 @@ export default function Home() {
         setRecentProjects(projectsData);
       } catch (error) {
         console.error("Error fetching projects:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchRecentProjects();
@@ -52,30 +35,42 @@ export default function Home() {
         {/* hero: (until the github chart) */}
         <section className="flex min-h-screen flex-col items-center sm:items-start px-4 py-24 md:py-28 sm:px-16">
           <Header />
-          <div className="font-code grid grid-cols-2 sm:grid-cols-3 gap-4 mt-12 w-full">
+          <div className="font-code grid grid-cols-2 sm:grid-cols-2 gap-4 mt-12 w-full">
             <p className="text-zinc-600 dark:text-zinc-400">
-              &gt; python / typescript / rust
+              <span className="font-bold text-zinc-800 dark:text-zinc-200">Main Interests</span><br></br>
+              &gt; cool stuff (and space things) / reading / gaming
             </p>
             <p className="text-zinc-600 dark:text-zinc-400">
-              &gt; django / nextjs / fastapi
+              <span className="font-bold text-zinc-800 dark:text-zinc-200">Sports</span><br></br>
+              &gt; basketball / running / afternoon walks
             </p>
             <p className="text-zinc-600 dark:text-zinc-400">
-              &gt; ml / pytorch / tensorflow
+              <span className="font-bold text-zinc-800 dark:text-zinc-200">Video Games I play (last 30 days)</span>
+              <br></br>
+              &gt; valorant / apex legends / marvel rivals / osu!
             </p>
             <p className="text-zinc-600 dark:text-zinc-400">
-              &gt; docker / aws / k8s
+              <span className="font-bold text-zinc-800 dark:text-zinc-200">Languages</span><br></br>
+              &gt; English / Filipino / Bicol / Japanese (Hiragana / Basic Conversation)
+              <br></br>
+              &gt; currently learning Japanese (Katakana)
             </p>
             <p className="text-zinc-600 dark:text-zinc-400">
-              &gt; llms / mcp / rag
+              <span className="font-bold text-zinc-800 dark:text-zinc-200">Others</span>
+              <br></br>
+              &gt; chess peak ratings | blitz 1600 | bullet 1700 | rapid 1500
+              <br></br>
+              &gt; competitive programming | codeforces 1200
             </p>
             <p className="text-zinc-600 dark:text-zinc-400">
-              &gt; cpp / c# / c major♪
+              <span className="font-bold text-zinc-800 dark:text-zinc-200">Music</span><br></br>
+              &gt; piano / chopin / rhythm games (osu!)
             </p>
-          </div>
+          </div>  
         </section>
-        <div className="w-full sm:mt-auto">
+        {/* <div className="w-full sm:mt-auto">
           <GithubChart />
-        </div>
+        </div> */}
         {/* SECTION 2: Below the fold */}
         <section className="flex flex-col gap-y-8 py-16 px-4 sm:px-16">
           <div className="flex flex-row justify-between">
@@ -94,16 +89,6 @@ export default function Home() {
           }
           {recentProjects.map(project => (
             <ProjectCard key={project.id} project={project} />
-          ))}
-        </section>
-
-        {/* Experiences section */}
-        <section className="flex flex-col gap-8 py-16 px-4 sm:px-16">
-          <h2 className="text-3xl font-semibold mb-4 text-black dark:text-zinc-50">
-            Experience
-          </h2>
-          {experiences.map(experience => (
-            <ExperienceCard key={experience.company} experience={experience} />
           ))}
         </section>
 

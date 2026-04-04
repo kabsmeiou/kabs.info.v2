@@ -19,22 +19,11 @@ export default function Header() {
             </div>
             {/* some links  */}
             <div className="flex items-center justify-center md:justify-start gap-x-4">
-                {/* Resume Link */}
-                <a
-                    href="https://kabsmeiou.github.io/content/pdf/resume.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-code font-bold rounded-lg px-4 py-2 dark:text-white text-black border border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"
-                >
-                    tale_of_service.resume
-                </a>
                 <a href="https://github.com/kabsmeiou" target="_blank" rel="noopener noreferrer">
                   <Image src={github} alt="GitHub Profile" width={32} height={32} className="rounded-md object-cover" />
                   
                 </a>
-                <a href="https://ph.linkedin.com/in/cvcabral" target="_blank" rel="noopener noreferrer">
-                  <Image src={linkedin} alt="LinkedIn Profile" width={32} height={32} className="rounded-md object-cover" />
-                </a>
+                {/* to add steam, discord, twitter, riotid */}
             </div>
         </div>
     );
