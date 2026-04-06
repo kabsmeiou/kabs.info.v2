@@ -59,7 +59,7 @@ export default function Header() {
                 <CopyIcon label="kabs#meiou" value="kabs#meiou">
                   <Image src="/riot.png" alt="Riot Games" width={32} height={32} className="rounded-md object-cover" />
                 </CopyIcon>
-                <a href="#" target="_blank" rel="noopener noreferrer">
+                <a href="https://open.spotify.com/user/qspsjuuiws83ilgixjmdol2qj" target="_blank" rel="noopener noreferrer">
                   <Image src="/spotify.png" alt="Spotify" width={32} height={32} className="rounded-md object-cover" />
                 </a>
             </div>
