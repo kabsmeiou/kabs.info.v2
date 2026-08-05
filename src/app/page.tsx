@@ -82,7 +82,7 @@ export default function Home() {
             </span>
           </div>
           <p className="text-zinc-600 dark:text-zinc-400 mb-8">
-            &gt; I like working on interesting and cool projects, but I also keep myself busy with trivial tasks as I believe they are essential for my growth as a software engineer - that's what my dreams have told me. I write code as a way to express my desire to make my ideas come to life and possibly make it a career to fund my research for the elixir of eternal life. If you find my work helpful in any way, do give it a like or two! or pay me to write some magic for you ⋆✴︎˚｡⋆
+            &gt; I like working on interesting and cool projects. It is all necessary to fund my research for the elixir of eternal life. If you find my work helpful in any way, do give it a like or two! or pay me to write some magic for you ⋆✴︎˚｡⋆
           </p>
           { isLoading && 
             <Loading />
